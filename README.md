@@ -1,4 +1,4 @@
-# ESP-IDF + Nim example template
+# ESP-IDF + Nim shared lib example template
 
 Project structure:
 
@@ -22,3 +22,6 @@ Export ESP-IDF first. Then:
 1. `idf.py set-target <TARGET>`
 1. `nimble prepare`
 1. `idf.py build`
+
+`nimble prepare` genereates a shared library (`libnim.a` file) for `idf.py` to link against.
+It is set in `main/CMakeLists.txt`.
