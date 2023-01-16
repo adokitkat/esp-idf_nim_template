@@ -15,6 +15,10 @@ Project structure:
 └── sdkconfig                  
 ```
 
+## Configure
+
+You need to set installed toolchain version in `esptarget.nims`
+
 ## Building
 
 Export ESP-IDF first. Then:
