@@ -17,15 +17,15 @@ Project structure:
 
 ## Configure
 
-You need to set installed toolchain version in `esptarget.nims`
+1. Install dependecies of this repo: `nimble install regex`
+1. Install and export `ESP-IDF`
 
-## Building
+Toolchain version should be found automatically from `PATH` enviroment variable.
 
-Export ESP-IDF first. Then:
+## Build
 
 1. `idf.py set-target <TARGET>`
 1. `nimble prepare`
 1. `idf.py build`
 
-`nimble prepare` genereates a shared library (`libnim.a` file) for `idf.py` to link against.
-It is set in `main/CMakeLists.txt`.
+`nimble prepare` genereates a shared library (`libnim.a` file). `idf.py build` then links your IDF program to the Nim library - this is configured in `main/CMakeLists.txt`.

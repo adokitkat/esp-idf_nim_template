@@ -1,5 +1,3 @@
-let toolchain_version = "esp-12.2.0_20230208"
-
 import os, strformat
 
 const sdkconfig_file = "sdkconfig"
@@ -25,5 +23,13 @@ elif target == "esp32s3":
     gcc_target = "xtensa-esp32s3-elf"
 else:
     gcc_target = "riscv32-esp-elf"
+
+const rx_toolchain_ver: Regex = re".espressif/tools/xtensa-esp32-elf/esp-(.+)/xtensa-esp32-elf/bin"
+let path_env = getEnv("PATH")
+var toolchain_version = "esp-"
+for m in path_env.findAll(rx_toolchain_ver):
+    toolchain_version &= m.groupFirstCapture(0, path_env)
+    break
+echo "Using toolchain version: ", toolchain_version
 
 let gcc_path = &"{os.getHomeDir()}.espressif/tools/{gcc_target}/{toolchain_version}/{gcc_target}/bin"

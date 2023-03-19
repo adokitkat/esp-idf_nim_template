@@ -55,4 +55,5 @@ build/**
 main/nimcache/**
 !main/nimcache/.placeholder
 sdkconfig
+sdkconfig.old
 *.cfg.old
