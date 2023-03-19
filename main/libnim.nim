@@ -1,13 +1,15 @@
 # Example Nim code
 
 proc add_int_in_nim*(a, b: cint): cint {.exportc.} =
-    result = a+b
-    echo "Echo in Nim: ", a, " + " , b, " = ",  result 
+    result = a + b
+    echo "Echo in Nim (int): ", a, " + " , b, " = ",  result 
 
 proc add_float_in_nim*(a, b: cfloat): cfloat {.exportc.} =
-    result = a+b
-    echo "Echo in Nim: ", a, " + " , b, " = ",  result
+    echo a + b
+    result = a + b
+    echo "Echo in Nim (float): ", a, " + " , b, " = ",  result
 
 proc add_double_in_nim*(a, b: cdouble): cdouble {.exportc.} =
-    result = a+b  
-    echo "Echo in Nim: ", a, " + " , b, " = ", result
+    echo a + b
+    result = a + b  
+    echo "Echo in Nim (double): ", a, " + " , b, " = ", result
