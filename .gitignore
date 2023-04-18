@@ -53,7 +53,7 @@ dkms.conf
 
 build/**
 main/nimcache/**
-!main/nimcache/.placeholder
+!main/nimcache/.gitkeep
 sdkconfig
 sdkconfig.old
 *.cfg.old

@@ -22,6 +22,7 @@ else:
 
 switch "os", "freertos"
 switch "mm", "orc"
+switch "threads", "off"
 
 switch "define", "debug"
 switch "opt", "size"
