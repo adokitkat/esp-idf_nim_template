@@ -34,7 +34,7 @@ switch "os", "freertos"
 switch "mm", "orc"
 switch "threads", "off"
 
-switch "define", "debug"
+switch "define", "release"
 switch "opt", "size"
 switch "out", "main/libnim.a"
 
