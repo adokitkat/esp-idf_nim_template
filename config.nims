@@ -20,6 +20,7 @@ if target == "esp32" or "esp32s" in target:
 else:
     # RISC-V CPU
     switch "cpu", "riscv32"
+    switch "passC", "-mtune=esp-base"
     if target in ["esp32c2", "esp32c3"]:
         switch "passC", "-march=rv32imc_zicsr_zifencei"
     elif target in ["esp32c5", "esp32c6", "esp32c61", "esp32h2", "esp32h21"]:
@@ -28,8 +29,15 @@ else:
         switch "passC", "-march=rv32imafc_zicsr_zifencei_zaamo_zalrsc_xespdsp"
         switch "passC", "-mabi=ilp32f"
     elif target in ["esp32p4"]:
-        switch "passC", "-march=rv32imafc_zicsr_zifencei_zaamo_zalrsc_xesploop_xespv2p1" # ESP32-P4 rev. 2 and earlier
-        # switch "passC", "-march=rv32imafc_zicsr_zifencei_zaamo_zalrsc_zcb_zcmp_zcmt_xesploop_xespv -mno-cm-popret -mno-cm-push-reverse" # ESP32-P4 rev. 3+
+        var esp32p4_rev = ""
+        const esp32p4_rev_rx: Regex= re"(# CONFIG_ESP32P4_SELECTS_REV_LESS_V3)"
+        for m in sdkconfig.findAll(esp32p4_rev_rx):
+            esp32p4_rev = m.groupFirstCapture(0, sdkconfig)
+            break
+        if esp32p4_rev == "":
+            switch "passC", "-march=rv32imafc_zicsr_zifencei_zaamo_zalrsc_xesploop_xespv2p1" # ESP32-P4 rev. 2 and earlier
+        else:
+            switch "passC", "-march=rv32imafc_zicsr_zifencei_zaamo_zalrsc_zcb_zcmp_zcmt_xesploop_xespv -mno-cm-popret -mno-cm-push-reverse" # ESP32-P4 rev. 3+
         switch "passC", "-mabi=ilp32f"
 
 switch "os", "freertos"

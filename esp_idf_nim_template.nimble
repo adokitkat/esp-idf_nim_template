@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.2.2"
+version       = "0.2.3"
 author        = "Adam Múdry"
 description   = "Run Nim from ESP-IDF C code"
 license       = "MIT"
