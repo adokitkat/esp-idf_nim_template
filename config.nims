@@ -16,7 +16,7 @@ if target == "esp32" or "esp32s" in target:
     if target == "esp32":
         switch "passC", "-Wno-frame-address"
     # Workaround for newer GCC versions (14+?)
-    switch "passC", "-Wno-incompatible-pointer-types"
+    switch "passC", "-Wno-incompatible-pointer-types" # https://github.com/nim-lang/Nim/issues/25200
 else:
     # RISC-V CPU
     switch "cpu", "riscv32"
