@@ -1,4 +1,4 @@
-# ESP-IDF + Nim shared lib example template
+# ESP-IDF + Nim static lib example template
 
 Project structure:
 
@@ -28,4 +28,4 @@ Toolchain version should be found automatically from `PATH` enviroment variable.
 1. `nimble prepare`
 1. `idf.py build`
 
-`nimble prepare` genereates a shared library (`libnim.a` file). `idf.py build` then links your IDF program to the Nim library - this is configured in `main/CMakeLists.txt`.
+`nimble prepare` genereates a static library binary (`libnim.a` file). `idf.py build` then links your IDF program to the Nim library - this is configured in `main/CMakeLists.txt`.
