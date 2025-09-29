@@ -15,6 +15,8 @@ if target == "esp32" or "esp32s" in target:
     switch "passC", "-mlongcalls -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero"
     if target == "esp32":
         switch "passC", "-Wno-frame-address"
+    # Workaround for newer GCC versions (14+?)
+    switch "passC", "-Wno-incompatible-pointer-types"
 else:
     # RISC-V CPU
     switch "cpu", "riscv32"
