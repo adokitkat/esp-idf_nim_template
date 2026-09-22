@@ -28,11 +28,13 @@ else:
 const rx_toolchain_ver_old: Regex = re".espressif/tools/xtensa-esp32-elf/esp-(.+)/xtensa-esp32-elf/bin"
 const rx_toolchain_ver: Regex = re".espressif/tools/xtensa-esp-elf/esp-(.+)/xtensa-esp-elf/bin"
 
-let path_env = getEnv("PATH")
+import strutils
+# Windows PATH entries use '\', the regexes above are written with '/'. normalizedPath()
+# is no help here: it converts towards the native separator, i.e. the wrong way round.
+let path_env = getEnv("PATH").replace('\\', '/')
 var toolchain_version = "esp-"
 var gcc_target_path = gcc_target
 
-import strutils
 for m in path_env.findAll(rx_toolchain_ver):
     toolchain_version &= m.groupFirstCapture(0, path_env)
     if target in ["esp32", "esp32s2", "esp32s3"]:

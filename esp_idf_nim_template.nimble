@@ -23,8 +23,8 @@ before prepare:
 
 import strutils, strformat
 after prepare:
-    let nimbase_path = getCurrentCompilerExe().rsplit("/", maxsplit=2)[0] & "/lib/nimbase.h"
-    exec &"cp {nimbase_path} main/nimcache/nimbase.h"
+    let nimbase_path = getCurrentCompilerExe().parentDir.parentDir / "lib" / "nimbase.h"
+    cpFile(nimbase_path, "main/nimcache/nimbase.h")
 
     # Record the target libnim.a was built for. main/CMakeLists.txt checks it, so that a
     # stale library (e.g. left over after `idf.py set-target`) is reported clearly instead
