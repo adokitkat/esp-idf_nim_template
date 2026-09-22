@@ -35,7 +35,7 @@ var gcc_target_path = gcc_target
 import strutils
 for m in path_env.findAll(rx_toolchain_ver):
     toolchain_version &= m.groupFirstCapture(0, path_env)
-    if target == "esp32" or "esp32s" in target:
+    if target in ["esp32", "esp32s2", "esp32s3"]:
         gcc_target_path = "xtensa-esp-elf"
     else:
         gcc_target_path = "riscv32-esp-elf"
@@ -45,10 +45,11 @@ if toolchain_version == "esp-":
     for m in path_env.findAll(rx_toolchain_ver_old):
         toolchain_version &= m.groupFirstCapture(0, path_env)
         break
-
-if toolchain_version == "esp-":
-    quit("Could not determine toolchain version from PATH environment variable")
-
+    if toolchain_version == "esp-":
+        quit("Could not determine toolchain version from PATH environment variable")
 echo "Using toolchain version: ", toolchain_version
 
 let gcc_path = &"{os.getHomeDir()}.espressif/tools/{gcc_target_path}/{toolchain_version}/{gcc_target_path}/bin"
+if not gcc_path.dirExists():
+    quit(fmt"Could not find GCC toolchain at {gcc_path}")
+echo "GCC path: ", gcc_path
